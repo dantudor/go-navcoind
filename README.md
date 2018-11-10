@@ -61,7 +61,7 @@ Click on the button below to access the full documentation:
 
 Unit tests
 ----
-[![Build Status](https://travis-ci.org/NavExplorer/go-navcoind.svg)](https://travis-ci.org/toorop/go-navcoind)
+[![Build Status](https://travis-ci.org/NavExplorer/go-navcoind.svg)](https://travis-ci.org/NavExplorer/go-navcoind)
 
 More than 100 unit tests are made.
 
