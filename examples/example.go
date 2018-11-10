@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/NavExplorer/go-navcoind"
-	"github.com/toorop/go-navcoind"
 	"log"
 )
 
