@@ -1,4 +1,4 @@
-package bitcoind
+package entity
 
 // Represents a block
 type Block struct {
@@ -8,14 +8,23 @@ type Block struct {
 	// The number of confirmations
 	Confirmations uint64 `json:"confirmations"`
 
+	// The block stripped size
+	StrippedSize uint64 `json:"strippedsize"`
+
 	// The block size
 	Size uint64 `json:"size"`
+
+	// The block weight
+	Weight uint64 `json:"weight"`
 
 	// The block height or index
 	Height uint64 `json:"height"`
 
 	// The block version
 	Version uint32 `json:"version"`
+
+	// The block version hex
+	VersionHex string `json:"versionhex"`
 
 	// The merkle root
 	Merkleroot string `json:"merkleroot"`
@@ -25,6 +34,9 @@ type Block struct {
 
 	// The block time in seconds since epoch (Jan 1 1970 GMT)
 	Time int64 `json:"time"`
+
+	// The block median time in seconds since epoch (Jan 1 1970 GMT)
+	MedianTime int64 `json:"mediantime"`
 
 	// The nonce
 	Nonce uint64 `json:"nonce"`

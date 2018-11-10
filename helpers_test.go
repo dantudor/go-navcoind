@@ -1,7 +1,7 @@
-package bitcoind
+package navcoind
 
 import (
-	//. "github.com/Toorop/go-bitcoind"
+	//. "github.com/NavExplorer/go-navcoind"
 	"errors"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"

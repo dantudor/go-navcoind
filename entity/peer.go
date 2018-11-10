@@ -1,4 +1,4 @@
-package bitcoind
+package entity
 
 type Peer struct {
 	// The ip address and port of the peer

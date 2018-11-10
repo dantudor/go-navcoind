@@ -1,7 +1,8 @@
-package bitcoind
+package navcoind
 
 import (
 	"fmt"
+	"github.com/NavExplorer/go-navcoind/entity"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"log"
@@ -20,7 +21,7 @@ func getNewTestServer(handler http.Handler) (testServer *httptest.Server, host s
 	return
 }
 
-var _ = Describe("Bitcoind", func() {
+var _ = Describe("Navcoind", func() {
 	// We normaly just have to test calls that return data + err
 	// server error handling is already tested in helpers_tests
 	// But for the fisrt test we will do it as sample
@@ -36,8 +37,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.BackupWallet("/tmp/wallet.dat")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.BackupWallet("/tmp/wallet.dat")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -52,8 +53,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.BackupWallet("/tmp/wallet.dat")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.BackupWallet("/tmp/wallet.dat")
 			It("error should occured", func() {
 				Expect(err).To(HaveOccurred())
 			})
@@ -74,8 +75,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			privKey, err := bitcoindClient.DumpPrivKey("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			privKey, err := navcoindClient.DumpPrivKey("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -95,8 +96,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.EncryptWallet("fakePasswd")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.EncryptWallet("fakePasswd")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -113,8 +114,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			account, err := bitcoindClient.GetAccount("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP2")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			account, err := navcoindClient.GetAccount("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP2")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -134,8 +135,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			account, err := bitcoindClient.GetAccountAddress("testAccount")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			account, err := navcoindClient.GetAccountAddress("testAccount")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -155,8 +156,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			addresses, err := bitcoindClient.GetAddressesByAccount("testAccount")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			addresses, err := navcoindClient.GetAddressesByAccount("testAccount")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -180,8 +181,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			balance, err := bitcoindClient.GetBalance("testAccount", 10)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			balance, err := navcoindClient.GetBalance("testAccount", 10)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -201,8 +202,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			bestblockhash, err := bitcoindClient.GetBestBlockhash()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			bestblockhash, err := navcoindClient.GetBestBlockhash()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -222,13 +223,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			bestblockhash, err := bitcoindClient.GetBlock("00000000000000003f8d1861d035e44d4297c49bd2517dc0a44ad73c7091926c")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			bestblockhash, err := navcoindClient.GetBlock("00000000000000003f8d1861d035e44d4297c49bd2517dc0a44ad73c7091926c")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return", func() {
-				Expect(bestblockhash).Should(Equal(Block{
+				Expect(bestblockhash).Should(Equal(entity.Block{
 					Hash:          "00000000000000003f8d1861d035e44d4297c49bd2517dc0a44ad73c7091926c",
 					Confirmations: 503,
 					Size:          348678,
@@ -778,8 +779,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			blockCount, err := bitcoindClient.GetBlockCount()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			blockCount, err := navcoindClient.GetBlockCount()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -799,8 +800,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			blockCount, err := bitcoindClient.GetBlockHash(0)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			blockCount, err := navcoindClient.GetBlockHash(0)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -820,8 +821,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			connectionCount, err := bitcoindClient.GetConnectionCount()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			connectionCount, err := navcoindClient.GetConnectionCount()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -841,57 +842,14 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			difficulty, err := bitcoindClient.GetDifficulty()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			difficulty, err := navcoindClient.GetDifficulty()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 
 			It("should return float64 8853416309.12779999", func() {
 				Expect(difficulty).Should(BeNumerically("==", 8853416309.12779999))
-			})
-		})
-	})
-
-	Describe("Testing GetGenerate", func() {
-		Context("when success", func() {
-			handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				fmt.Fprintln(w, `{"result":false,"error":null,"id":1400564115387666493}`)
-			})
-			ts, host, port, err := getNewTestServer(handler)
-			if err != nil {
-				log.Fatalln(err)
-			}
-			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			generate, err := bitcoindClient.GetGenerate()
-			It("should not error", func() {
-				Expect(err).NotTo(HaveOccurred())
-			})
-
-			It("should return bool false", func() {
-				Expect(generate).Should(BeFalse())
-			})
-		})
-	})
-
-	Describe("Testing GetHashesPerSec", func() {
-		Context("when success", func() {
-			handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				fmt.Fprintln(w, `{"result":0,"error":null,"id":1400564491799978781}`)
-			})
-			ts, host, port, err := getNewTestServer(handler)
-			if err != nil {
-				log.Fatalln(err)
-			}
-			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			generate, err := bitcoindClient.GetHashesPerSec()
-			It("should not error", func() {
-				Expect(err).NotTo(HaveOccurred())
-			})
-			It("should return int 0", func() {
-				Expect(generate).Should(BeNumerically("==", 0))
 			})
 		})
 	})
@@ -906,13 +864,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			rinfo, err := bitcoindClient.GetInfo()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			rinfo, err := navcoindClient.GetInfo()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return", func() {
-				Expect(rinfo).Should(Equal(Info{
+				Expect(rinfo).Should(Equal(entity.Info{
 					Version:         99900,
 					Protocolversion: 70002,
 					Walletversion:   60000,
@@ -944,13 +902,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			rinfo, err := bitcoindClient.GetMiningInfo()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			rinfo, err := navcoindClient.GetMiningInfo()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return", func() {
-				Expect(rinfo).Should(Equal(MiningInfo{
+				Expect(rinfo).Should(Equal(entity.MiningInfo{
 					Blocks:           301676,
 					CurrentBlocksize: 717621,
 					CurrentBlockTx:   1043,
@@ -977,8 +935,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			newAddress, err := bitcoindClient.GetNewAddress()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			newAddress, err := navcoindClient.GetNewAddress()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -999,8 +957,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			addresses, err := bitcoindClient.GetAddressesByAccount("fakeAccount")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			addresses, err := navcoindClient.GetAddressesByAccount("fakeAccount")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1020,13 +978,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			peerInfo, err := bitcoindClient.GetPeerInfo()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			peerInfo, err := navcoindClient.GetPeerInfo()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return", func() {
-				Expect(peerInfo).Should(Equal([]Peer{{
+				Expect(peerInfo).Should(Equal([]entity.Peer{{
 					Addr:           "37.187.58.89:8333",
 					Addrlocal:      "92.222.29.108:8333",
 					Services:       "00000001",
@@ -1076,8 +1034,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			rawAddress, err := bitcoindClient.GetRawChangeAddress()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			rawAddress, err := navcoindClient.GetRawChangeAddress()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1098,8 +1056,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txIds, err := bitcoindClient.GetRawMempool()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txIds, err := navcoindClient.GetRawMempool()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1120,8 +1078,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txIds, err := bitcoindClient.GetRawTransaction("00010589f7c108a4fd546df03a17bf485ede3baf52b35ddd5b83e974ec360abf", false)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txIds, err := navcoindClient.GetRawTransaction("00010589f7c108a4fd546df03a17bf485ede3baf52b35ddd5b83e974ec360abf", false)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1138,33 +1096,33 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txIds, err := bitcoindClient.GetRawTransaction("00010589f7c108a4fd546df03a17bf485ede3baf52b35ddd5b83e974ec360abf", true)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txIds, err := navcoindClient.GetRawTransaction("00010589f7c108a4fd546df03a17bf485ede3baf52b35ddd5b83e974ec360abf", true)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return RawTX", func() {
-				Expect(txIds).To(Equal(RawTransaction{
+				Expect(txIds).To(Equal(entity.RawTransaction{
 					Hex:      "01000000018054dfd3011da441f52d237c951bcc89be8c00ac77404c4797f4d8d7884c0cab000000006a473044022032771ee953e3c7809f57179dfb8d58eb4e47fb8721441174325a3e3008c11c8102200b436200ab9d006aab87c8595749da9c03e4490179401de9b5c281cfa5e658c4012103bfde0ae35e6aabc875f937ea708934583aa33f47b5653b12acae191a4ad5ff5effffffff0250690f00000000001976a914e5344f52ecc92c279028a851c9d8ed57bb5dfc6088ac19c51600000000001976a9143399e4655281f5dbb3e157930c724dd3e748a42088ac00000000",
 					Txid:     "00010589f7c108a4fd546df03a17bf485ede3baf52b35ddd5b83e974ec360abf",
 					Version:  1,
 					LockTime: 0,
-					Vin: []Vin{
+					Vin: []entity.Vin{
 						{
 							Coinbase: "",
 							Txid:     "ab0c4c88d7d8f497474c4077ac008cbe89cc1b957c232df541a41d01d3df5480",
 							Vout:     0,
-							ScriptSig: ScriptSig{
+							ScriptSig: entity.ScriptSig{
 								Asm: "3044022032771ee953e3c7809f57179dfb8d58eb4e47fb8721441174325a3e3008c11c8102200b436200ab9d006aab87c8595749da9c03e4490179401de9b5c281cfa5e658c401 03bfde0ae35e6aabc875f937ea708934583aa33f47b5653b12acae191a4ad5ff5e",
 								Hex: "473044022032771ee953e3c7809f57179dfb8d58eb4e47fb8721441174325a3e3008c11c8102200b436200ab9d006aab87c8595749da9c03e4490179401de9b5c281cfa5e658c4012103bfde0ae35e6aabc875f937ea708934583aa33f47b5653b12acae191a4ad5ff5e",
 							},
 							Sequence: 4294967295,
 						}},
-					Vout: []Vout{
+					Vout: []entity.Vout{
 						{
 							Value: 0.0101,
 							N:     0,
-							ScriptPubKey: ScriptPubKey{
+							ScriptPubKey: entity.ScriptPubKey{
 								Asm:       "OP_DUP OP_HASH160 e5344f52ecc92c279028a851c9d8ed57bb5dfc60 OP_EQUALVERIFY OP_CHECKSIG",
 								Hex:       "76a914e5344f52ecc92c279028a851c9d8ed57bb5dfc6088ac",
 								ReqSigs:   1,
@@ -1175,7 +1133,7 @@ var _ = Describe("Bitcoind", func() {
 						{
 							Value: 0.01492249,
 							N:     1,
-							ScriptPubKey: ScriptPubKey{
+							ScriptPubKey: entity.ScriptPubKey{
 								Asm:       "OP_DUP OP_HASH160 3399e4655281f5dbb3e157930c724dd3e748a420 OP_EQUALVERIFY OP_CHECKSIG",
 								Hex:       "76a9143399e4655281f5dbb3e157930c724dd3e748a42088ac",
 								ReqSigs:   1,
@@ -1203,8 +1161,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			amount, err := bitcoindClient.GetReceivedByAccount("all", 1)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			amount, err := navcoindClient.GetReceivedByAccount("all", 1)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1225,8 +1183,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			amount, err := bitcoindClient.GetReceivedByAddress("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3", 1)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			amount, err := navcoindClient.GetReceivedByAddress("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3", 1)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1247,14 +1205,14 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			transaction, err := bitcoindClient.GetTransaction("a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			transaction, err := navcoindClient.GetTransaction("a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 
 			It("should return Transaction", func() {
-				Expect(transaction).Should(Equal(Transaction{
+				Expect(transaction).Should(Equal(entity.Transaction{
 					Amount:          0.0001,
 					Account:         "",
 					Address:         "",
@@ -1268,7 +1226,7 @@ var _ = Describe("Bitcoind", func() {
 					WalletConflicts: []string{},
 					Time:            1400652519,
 					TimeReceived:    1400652519,
-					Details: []TransactionDetails{
+					Details: []entity.TransactionDetails{
 						{
 							Account:  "tests",
 							Address:  "1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy",
@@ -1293,18 +1251,18 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			uTxOut, err := bitcoindClient.GetTxOut("a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515", 1, false)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			uTxOut, err := navcoindClient.GetTxOut("a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515", 1, false)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 
 			It("should return UTransactionOut", func() {
-				Expect(uTxOut).Should(Equal(UTransactionOut{
+				Expect(uTxOut).Should(Equal(entity.UTransactionOut{
 					Bestblock:     "00000000000000005fc5487bb67b58573eef3ba369972f6acfc5240cf375878f",
 					Confirmations: 7,
 					Value:         0.0001,
-					ScriptPubKey: ScriptPubKey{
+					ScriptPubKey: entity.ScriptPubKey{
 						Asm:       "OP_DUP OP_HASH160 fc0d1e43cea1c5df928971f8add5d67ce4313003 OP_EQUALVERIFY OP_CHECKSIG",
 						Hex:       "76a914fc0d1e43cea1c5df928971f8add5d67ce431300388ac",
 						ReqSigs:   1,
@@ -1328,14 +1286,14 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			amount, err := bitcoindClient.GetTxOutsetInfo()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			amount, err := navcoindClient.GetTxOutsetInfo()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 
 			It("should return a TransactionOutSet", func() {
-				Expect(amount).Should(Equal(TransactionOutSet{
+				Expect(amount).Should(Equal(entity.TransactionOutSet{
 					Height:          301911,
 					Bestblock:       "00000000000000000844a8f3d18bc55f08d591fabc4e8d3ac0105e4974538cf2",
 					Transactions:    3.212087e+06,
@@ -1344,52 +1302,6 @@ var _ = Describe("Bitcoind", func() {
 					HashSerialized:  "6aa4a70a010a7ac8e41e335007ee2f7cfb81db2bd1093bc27663aed55e6fc001",
 					TotalAmount:     1.279763979102867e+07,
 				}))
-			})
-		})
-	})
-
-	Describe("Testing GetWork", func() {
-		Context("when success", func() {
-			Context("without data parameter", func() {
-				handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					fmt.Fprintln(w, `{"result":{"midstate":"5e743ccc47f96cb11d2971a3a97c51180e5f1830e23b4f708a3ed074c92c225f","data":"00000002f5cef24cdda03a94bbf39d281641dfa5b0a949c30bf83f6300000000000000004f3f40016ec1623897048811826238d8f66fd4f064a0d8eaff4eb057b337b404537cf83a187c305300000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000","hash1":"00000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000010000","target":"00000000000000000000000000000000000000000053307c0000000000000000"},"error":null,"id":1400699018629784233}`)
-				})
-				ts, host, port, err := getNewTestServer(handler)
-				if err != nil {
-					log.Fatalln(err)
-				}
-				defer ts.Close()
-				bitcoindClient, _ := New(host, port, "x", "fake", false)
-				amount, err := bitcoindClient.GetWork()
-				It("should not error", func() {
-					Expect(err).NotTo(HaveOccurred())
-				})
-				It("should return a Work ", func() {
-					Expect(amount).Should(Equal(Work{
-						Midstate: "5e743ccc47f96cb11d2971a3a97c51180e5f1830e23b4f708a3ed074c92c225f",
-						Data:     "00000002f5cef24cdda03a94bbf39d281641dfa5b0a949c30bf83f6300000000000000004f3f40016ec1623897048811826238d8f66fd4f064a0d8eaff4eb057b337b404537cf83a187c305300000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000",
-						Hash1:    "00000000000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000010000",
-						Target:   "00000000000000000000000000000000000000000053307c0000000000000000",
-					}))
-				})
-			})
-			Context("with data parameter", func() {
-				handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					fmt.Fprintln(w, `{"result":false,"error":null,"id":1400699245872721725}`)
-				})
-				ts, host, port, err := getNewTestServer(handler)
-				if err != nil {
-					log.Fatalln(err)
-				}
-				defer ts.Close()
-				bitcoindClient, _ := New(host, port, "x", "fake", false)
-				amount, err := bitcoindClient.GetWork("00000002f5cef24cdda03a94bbf39d281641dfa5b0a949c30bf83f6300000000000000004f3f40016ec1623897048811826238d8f66fd4f064a0d8eaff4eb057b337b404537cf83a187c305300000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000")
-				It("should not error", func() {
-					Expect(err).NotTo(HaveOccurred())
-				})
-				It("should return a boolean ", func() {
-					Expect(amount).Should(BeFalse())
-				})
 			})
 		})
 	})
@@ -1404,8 +1316,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.ImportPrivKey("fakeprivkey", "imported from mars", true)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.ImportPrivKey("fakeprivkey", "imported from mars", true)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1422,8 +1334,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.KeyPoolRefill()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.KeyPoolRefill()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1440,8 +1352,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			accounts, err := bitcoindClient.ListAccounts(4)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			accounts, err := navcoindClient.ListAccounts(4)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1466,8 +1378,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			list, err := bitcoindClient.ListAddressGroupings()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			list, err := navcoindClient.ListAddressGroupings()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1503,8 +1415,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txID, err := bitcoindClient.ListReceivedByAccount(1, true)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txID, err := navcoindClient.ListReceivedByAccount(1, true)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1534,8 +1446,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txID, err := bitcoindClient.ListReceivedByAddress(1, true)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txID, err := navcoindClient.ListReceivedByAddress(1, true)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1569,13 +1481,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			transactions, err := bitcoindClient.ListSinceBlock("00000000000000003f8d1861d035e44d4297c49bd2517dc0a44ad73c7091926c", 1)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			transactions, err := navcoindClient.ListSinceBlock("00000000000000003f8d1861d035e44d4297c49bd2517dc0a44ad73c7091926c", 1)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("sould return a slice of Transaction", func() {
-				Expect(transactions).Should(Equal([]Transaction{
+				Expect(transactions).Should(Equal([]entity.Transaction{
 					{
 						Amount:          0.0002,
 						Account:         "test2",
@@ -1625,13 +1537,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			transactions, err := bitcoindClient.ListTransactions("tests", 10, 0)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			transactions, err := navcoindClient.ListTransactions("tests", 10, 0)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return a slice of transactions", func() {
-				Expect(transactions).Should(Equal([]Transaction{
+				Expect(transactions).Should(Equal([]entity.Transaction{
 					{
 						Amount:          0.0001,
 						Account:         "tests",
@@ -1681,13 +1593,13 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			transactions, err := bitcoindClient.ListUnspent(1, 9999)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			transactions, err := navcoindClient.ListUnspent(1, 9999)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
 			It("should return a transaction ID ", func() {
-				Expect(transactions).Should(Equal([]Transaction{
+				Expect(transactions).Should(Equal([]entity.Transaction{
 					{
 						Amount:          0.0001,
 						Account:         "test2",
@@ -1737,8 +1649,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			success, err := bitcoindClient.LockUnspent(false, []UnspendableOutput{{"61195c9a04eb4bb6ef7c1d360e472b1620c4befed611ddcab46a6b2711344cd5", 0}, {"a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515", 0}})
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			success, err := navcoindClient.LockUnspent(false, []UnspendableOutput{{"61195c9a04eb4bb6ef7c1d360e472b1620c4befed611ddcab46a6b2711344cd5", 0}, {"a1b7093d041bc1b763ba1ad894d2bd5376b38e6c7369613684e7140e8d9f7515", 0}})
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1758,8 +1670,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			success, err := bitcoindClient.ListLockUnspent()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			success, err := navcoindClient.ListLockUnspent()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1788,8 +1700,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			success, err := bitcoindClient.Move("tests1", "test2", 0.0001, 1, "Move test")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			success, err := navcoindClient.Move("tests1", "test2", 0.0001, 1, "Move test")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1809,8 +1721,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			txID, err := bitcoindClient.SendFrom("fakeAccount", "1HgpsmxV52eAjDcoNpVGpYEhGfgN7mM1JB", 0.0001, 1, "Comment", "CommentTo")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			txID, err := navcoindClient.SendFrom("fakeAccount", "1HgpsmxV52eAjDcoNpVGpYEhGfgN7mM1JB", 0.0001, 1, "Comment", "CommentTo")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1830,11 +1742,11 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
 			amounts := make(map[string]float64)
 			amounts["1HgpsmxV52eAjDcoNpVGpYEhGfgN7mM1JB"] = 0.0001
 			amounts["1Ldfez73eanxUZhudrS62BXqk8BrLxYQFj"] = 0.0001
-			txID, err := bitcoindClient.SendMany("tests", amounts, 1, "test sendMany")
+			txID, err := navcoindClient.SendMany("tests", amounts, 1, "test sendMany")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1854,11 +1766,11 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
 			amounts := make(map[string]float64)
 			amounts["1HgpsmxV52eAjDcoNpVGpYEhGfgN7mM1JB"] = 0.0001
 			amounts["1Ldfez73eanxUZhudrS62BXqk8BrLxYQFj"] = 0.0001
-			txID, err := bitcoindClient.SendToAddress("1Ldfez73eanxUZhudrS62BXqk8BrLxYQFj", 0.0001, "send to address test", "send to cx")
+			txID, err := navcoindClient.SendToAddress("1Ldfez73eanxUZhudrS62BXqk8BrLxYQFj", 0.0001, "send to address test", "send to cx")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1878,26 +1790,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.SetAccount("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3", "tests")
-			It("should not error", func() {
-				Expect(err).NotTo(HaveOccurred())
-			})
-		})
-	})
-
-	Describe("Testing SetGenerate", func() {
-		Context("when success", func() {
-			handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				fmt.Fprintln(w, `{"result":null,"error":null,"id":1401085240686123320}`)
-			})
-			ts, host, port, err := getNewTestServer(handler)
-			if err != nil {
-				log.Fatalln(err)
-			}
-			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.SetGenerate(true, 1)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.SetAccount("1KU5DX7jKECLxh1nYhmQ7CahY7GMNMVLP3", "tests")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1914,8 +1808,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.SetTxFee(0.0001)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.SetTxFee(0.0001)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1932,8 +1826,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			sig, err := bitcoindClient.SignMessage("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy", "test message")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			sig, err := navcoindClient.SignMessage("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy", "test message")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1953,8 +1847,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.Stop()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.Stop()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -1971,8 +1865,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			resp, err := bitcoindClient.ValidateAddress("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			resp, err := navcoindClient.ValidateAddress("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -2000,8 +1894,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			success, err := bitcoindClient.VerifyMessage("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy", "fake_sig", "test message")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			success, err := navcoindClient.VerifyMessage("1Pyizp4HK7Bfz7CdbSwHHtprk7Ghumhxmy", "fake_sig", "test message")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -2021,8 +1915,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.WalletLock()
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.WalletLock()
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -2039,8 +1933,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.WalletPassphrase("fakePassPhrase", 60)
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.WalletPassphrase("fakePassPhrase", 60)
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -2057,8 +1951,8 @@ var _ = Describe("Bitcoind", func() {
 				log.Fatalln(err)
 			}
 			defer ts.Close()
-			bitcoindClient, _ := New(host, port, "x", "fake", false)
-			err = bitcoindClient.WalletPassphraseChange("fakePassPhrase", "fake passphrase")
+			navcoindClient, _ := New(host, port, "x", "fake", false)
+			err = navcoindClient.WalletPassphraseChange("fakePassPhrase", "fake passphrase")
 			It("should not error", func() {
 				Expect(err).NotTo(HaveOccurred())
 			})

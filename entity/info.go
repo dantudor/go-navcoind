@@ -1,4 +1,4 @@
-package bitcoind
+package entity
 
 // An Info represent a response to getmininginfo
 type Info struct {

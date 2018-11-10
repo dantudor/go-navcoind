@@ -1,4 +1,4 @@
-package bitcoind
+package entity
 
 // A MiningInfo represents a mininginfo response
 type MiningInfo struct {

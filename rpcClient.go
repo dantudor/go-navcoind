@@ -1,4 +1,4 @@
-package bitcoind
+package navcoind
 
 import (
 	"bytes"
